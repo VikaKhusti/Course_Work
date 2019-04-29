@@ -7,4 +7,57 @@
     android:layout_height="match_parent"
     tools:context=".LogInActivity">
 
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="489dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/user_name" />
+
+    <EditText
+        android:id="@+id/loginEditText"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="424dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/login" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="367dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="355dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="163dp"
+        android:layout_marginRight="163dp"
+        android:layout_marginBottom="271dp"
+        android:text="@string/log_in" />
+
 </RelativeLayout>

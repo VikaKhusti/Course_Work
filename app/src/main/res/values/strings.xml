@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Course_Work</string>
+    <string name="log_in">Ввійти</string>
+    <string name="sign_up">Зареєструватися</string>
 </resources>

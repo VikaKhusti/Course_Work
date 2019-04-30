@@ -4,4 +4,6 @@
     <string name="sign_up">Зареєструватися</string>
     <string name="user_name">Ім\'я користувача</string>
     <string name="login">Логін</string>
+    <string name="title_activity_index">IndexActivity</string>
+    <string name="password">Пароль</string>
 </resources>

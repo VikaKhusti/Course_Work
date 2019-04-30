@@ -8,22 +8,8 @@
     tools:context=".LogInActivity">
 
     <EditText
-        android:id="@+id/usernameEditText"
-        android:layout_width="366dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="489dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/user_name" />
-
-    <EditText
         android:id="@+id/loginEditText"
-        android:layout_width="369dp"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -33,11 +19,11 @@
         android:layout_marginBottom="424dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/login" />
+        android:textColor="@color/colorBlack" />
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="367dp"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -46,10 +32,11 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="355dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/colorBlack" />
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/log_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -59,5 +46,33 @@
         android:layout_marginRight="163dp"
         android:layout_marginBottom="271dp"
         android:text="@string/log_in" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="429dp"
+        android:layout_toStartOf="@+id/loginEditText"
+        android:layout_toLeftOf="@+id/loginEditText"
+        android:text="@string/login"
+        android:textColor="@color/colorBlack"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="356dp"
+        android:layout_toStartOf="@+id/passwordEditText"
+        android:layout_toLeftOf="@+id/passwordEditText"
+        android:text="@string/password"
+        android:textColor="@color/colorBlack"
+        android:textSize="22sp" />
 
 </RelativeLayout>

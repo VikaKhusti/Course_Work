@@ -1,10 +1,9 @@
 package com.example.vika.course_work;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +22,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        submit = (Button) findViewById(R.id.submit);
+        submit = (Button) findViewById(R.id.log_in);
         submit.setOnClickListener(this);
         usernameET = (EditText) findViewById(R.id.usernameEditText);
         loginET = (EditText) findViewById(R.id.loginEditText);
@@ -46,13 +45,16 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
         switch (v.getId())
         {
-            case R.id.submit:
+            case R.id.log_in:
                 contentValues.put("username", username);
                 contentValues.put("login", login);
                 contentValues.put("password", password);
                 long rowID = database.insert("users", null, contentValues);
-                Log.d(LOG_TAG, "row inserted with ID = " + rowID +
-                        " content values : " + contentValues);
+                Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
+                        "------ content values : " + contentValues);
+
+                Intent intent = new Intent(this, IndexActivity.class);
+                startActivity(intent);
                 break;
         }
         dbHelper.close();

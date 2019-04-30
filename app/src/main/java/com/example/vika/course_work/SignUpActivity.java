@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUpActivity extends Activity implements View.OnClickListener {
 
@@ -46,16 +47,25 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.log_in:
-                contentValues.put("username", username);
-                contentValues.put("login", login);
-                contentValues.put("password", password);
-                long rowID = database.insert("users", null, contentValues);
-                Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
-                        "------ content values : " + contentValues);
+                if(username.equals("") || login.equals("") || password.equals("")) {
+                    Toast toast = Toast.makeText(SignUpActivity.this, "Заповніть всі поля", Toast.LENGTH_LONG);
+                    toast.show();
+                    break;
+                }
+                else {
+                    contentValues.put("username", username);
+                    contentValues.put("login", login);
+                    contentValues.put("password", password);
+                    long rowID = database.insert("users", null, contentValues);
+                    Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
+                            "------ content values : " + contentValues);
 
-                Intent intent = new Intent(this, IndexActivity.class);
-                startActivity(intent);
-                break;
+                    Intent intent = new Intent(this, UserActivity.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                }
+                    break;
+
         }
         dbHelper.close();
     }

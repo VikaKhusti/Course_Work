@@ -6,4 +6,6 @@
     <string name="login">Логін</string>
     <string name="title_activity_index">IndexActivity</string>
     <string name="password">Пароль</string>
+    <string name="add_photo">Додайте ваше фото</string>
+    <string name="preferences">Налаштування</string>
 </resources>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class LogInActivity extends Activity implements View.OnClickListener {
 
     final String LOG_TAG = "myLogs";
+    public static String USERNAME;
 
     Button login;
     EditText usernameET, loginET, passwordET;
@@ -60,7 +61,9 @@ public class LogInActivity extends Activity implements View.OnClickListener {
 
                         if(login.equals(cursor.getString(loginColIndex))){
                             if(password.equals(cursor.getString(passwordColIndex))){
-                                Intent intent = new Intent(this, IndexActivity.class);
+                                String username = cursor.getString(usernameColIndex);
+                                Intent intent = new Intent(this, UserActivity.class);
+                                intent.putExtra("username", username);
                                 startActivity(intent);
                             }
                             else{

@@ -4,7 +4,7 @@
 
     <EditTextPreference
         android:key="change_username"
-        android:summary="change username"
+        android:summary=""
         android:title="Змінити ім'я користувача">
     </EditTextPreference>
 </PreferenceScreen>

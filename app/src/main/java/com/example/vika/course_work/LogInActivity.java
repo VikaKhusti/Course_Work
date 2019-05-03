@@ -1,6 +1,7 @@
 package com.example.vika.course_work;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,6 +33,8 @@ public class LogInActivity extends Activity implements View.OnClickListener {
         dbHelper = new DBHelper(this);
     }
 
+
+
     @Override
     public void onClick(View v) {
 
@@ -40,47 +43,57 @@ public class LogInActivity extends Activity implements View.OnClickListener {
 
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.log_in:
+
                 Log.d(LOG_TAG, "------ Rows in mytable: ------");
                 Cursor cursor = database.query("users", null, null,
                         null, null, null,
-                        null,null);
-                if(cursor.moveToFirst()) {
+                        null, null);
+
+                if (cursor.moveToFirst())
+                {
                     int idColIndex = cursor.getColumnIndex("id");
                     int usernameColIndex = cursor.getColumnIndex("username");
                     int loginColIndex = cursor.getColumnIndex("login");
                     int passwordColIndex = cursor.getColumnIndex("password");
 
-                    do{
-                        Log.d(LOG_TAG,
-                                "ID = " + cursor.getInt(idColIndex) + ", username = "
-                                        + cursor.getString(usernameColIndex) + ", login = "
-                                        + cursor.getString(loginColIndex) + ", password = "
-                                        + cursor.getString(passwordColIndex));
 
-                        if(login.equals(cursor.getString(loginColIndex))){
-                            if(password.equals(cursor.getString(passwordColIndex))){
-                                String username = cursor.getString(usernameColIndex);
-                                Intent intent = new Intent(this, UserActivity.class);
-                                intent.putExtra("username", username);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast toast = Toast.makeText(LogInActivity.this,
-                                        "Логін або пароль не правильний", Toast.LENGTH_LONG);
-                                toast.show();
-                            }
+                        do {
+                            Log.d(LOG_TAG,
+                                    "ID = " + cursor.getInt(idColIndex) + ", username = "
+                                            + cursor.getString(usernameColIndex) + ", login = "
+                                            + cursor.getString(loginColIndex) + ", password = "
+                                            + cursor.getString(passwordColIndex)
+                            );
+
+                                    if (login.equals(cursor.getString(loginColIndex))) {
+                                        if (password.equals(cursor.getString(passwordColIndex))) {
+                                            String username = cursor.getString(usernameColIndex);
+                                            Intent intent = new Intent(this, UserActivity.class);
+                                            intent.putExtra("username", username);
+                                            startActivity(intent);
+
+                                    } else {
+                                        Toast toast = Toast.makeText(LogInActivity.this,
+                                                "Логін або пароль не правильний", Toast.LENGTH_LONG);
+                                        toast.show();
+
+                                    }
+
+                                }
+
+
 
                         }
+                        while (cursor.moveToNext());
                     }
-                    while (cursor.moveToNext());
-                } else {
-                    Log.d(LOG_TAG, "------ 0 rows ------");
+                    else {
+                        Log.d(LOG_TAG, "------ 0 rows ------");
 
+                    }
+                    cursor.close();
+                    break;
                 }
-                cursor.close();
-                break;
         }
     }
-}

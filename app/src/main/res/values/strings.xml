@@ -8,4 +8,8 @@
     <string name="password">Пароль</string>
     <string name="add_photo">Додайте ваше фото</string>
     <string name="preferences">Налаштування</string>
+    <string name="add_new_course">Дадати новий курс</string>
+    <string name="title">Назва курсу</string>
+    <string name="description">Опис</string>
+    <string name="count_of_lessons"> Кількість уроків</string>
 </resources>

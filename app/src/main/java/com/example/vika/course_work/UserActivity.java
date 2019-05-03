@@ -24,6 +24,11 @@ public class UserActivity extends AppCompatActivity {
         userTextView = (TextView) findViewById(R.id.usernameTV);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        if(username.equals("Admin"))
+        {
+            Intent i = new Intent(this, AdminPanel.class);
+            startActivity(i);
+        }
         userTextView.setText(username);
         Log.d(LOG_TAG, "username now is " + username);
 

@@ -64,6 +64,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     intent.putExtra("username", username);
                     startActivity(intent);
                 }
+
                     break;
 
         }

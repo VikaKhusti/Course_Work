@@ -1,5 +1,6 @@
 package com.example.vika.course_work;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
     EditText titleET, descrET, countET;
     ImageButton imageBtn;
 
+    String title, description ,count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +23,21 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
         descrET = (EditText) findViewById(R.id.description);
         countET = (EditText) findViewById(R.id.count);
         imageBtn = (ImageButton) findViewById(R.id.imageButton);
+
+        title = titleET.getText().toString();
+        description = descrET.getText().toString();
+        count = countET.getText().toString();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageButton:
-                //ToDO
+                Intent intent = new Intent(this, AddLessonActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("desciption", description);
+                intent.putExtra("count", count);
+                startActivity(intent);
                 break;
         }
     }

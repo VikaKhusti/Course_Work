@@ -21,7 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "username text,"
                 + "login text,"
                 + "password text" + ");");
-        Log.d(LOG_TAG, "DB is created");
+        Log.d(LOG_TAG, "DB Users is created");
+
 
          String username = "Admin";
          String login = "admin_login";

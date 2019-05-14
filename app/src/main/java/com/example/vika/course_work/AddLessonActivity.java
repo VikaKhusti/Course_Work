@@ -14,7 +14,7 @@ public class AddLessonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lesson);
 
-        titleTV = (TextView) findViewById(R.id.titleTV);
+        titleTV = (TextView) findViewById(R.id.titleTextView);
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");

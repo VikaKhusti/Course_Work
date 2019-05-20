@@ -3,9 +3,10 @@ package com.example.vika.course_work;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
-public class AddLessonActivity extends AppCompatActivity {
+public class AddLessonActivity extends AppCompatActivity  implements View.OnClickListener {
 
     TextView titleTV, descrTV, countTV;
     String title, description ,count;
@@ -18,5 +19,10 @@ public class AddLessonActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

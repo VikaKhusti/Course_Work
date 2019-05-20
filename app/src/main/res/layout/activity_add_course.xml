@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFFFFF"
-    android:orientation="vertical"
     tools:context=".AddCourseActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="373dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="@string/Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <ImageButton
+        android:id="@+id/saveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/description"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/count_of_lessons"
-        android:textSize="20sp" />
+        android:layout_marginEnd="156dp"
+        android:layout_marginRight="156dp"
+        android:layout_marginBottom="408dp"
+        android:background="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/cont52" />
 
     <EditText
         android:id="@+id/countEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="373dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="@string/Count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save" />
+    <EditText
+        android:id="@+id/descEditText"
+        android:layout_width="373dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:ems="10"
+        android:inputType="textPersonName|textImeMultiLine"
+        android:text="@string/Descr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

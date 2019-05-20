@@ -1,6 +1,5 @@
 package com.example.vika.course_work;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,17 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
-
-public class AddCourseActivity extends Activity implements View.OnClickListener {
+public class AddCourseActivity extends AppCompatActivity implements View.OnClickListener {
 
     final String LOG_TAG = "myLogs";
-
-    EditText titleET, descrET, countET;
-    Button save;
+    EditText titleET, descET, countET;
+    ImageButton saveBtn;
+    String title, description, count;
     DBCourses dbCourses;
-    String title, description ,count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,44 +25,42 @@ public class AddCourseActivity extends Activity implements View.OnClickListener 
         setContentView(R.layout.activity_add_course);
 
         titleET = (EditText) findViewById(R.id.titleEditText);
-        descrET = (EditText) findViewById(R.id.descriptionEditText);
+        descET = (EditText) findViewById(R.id.descEditText);
         countET = (EditText) findViewById(R.id.countEditText);
-
-
-        save = (Button) findViewById(R.id.saveBtn);
-        save.setOnClickListener(this);
-
-        title = titleET.getText().toString();
-        description = descrET.getText().toString();
-        count = countET.getText().toString();
+        saveBtn = (ImageButton) findViewById(R.id.saveImageButton);
+        saveBtn.setOnClickListener(this);
 
         dbCourses = new DBCourses(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
 
         SQLiteDatabase database = dbCourses.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
+        ContentValues cv = new ContentValues();
 
         switch (v.getId()){
-            case R.id.saveBtn:
-                Log.d(LOG_TAG, "in saveBtn listener");
-                Log.d(LOG_TAG, "title: " + title + "desciption: " + description + "count: " + count);
-                contentValues.put("title", title);
-                contentValues.put("description", description);
-                contentValues.put("count", count);
-                Log.d(LOG_TAG, "content values are: " + contentValues);
+            case R.id.saveImageButton:
+                title = titleET.getText().toString();
+                description = descET.getText().toString();
+                count = countET.getText().toString();
 
-                long rowID = database.insert("courses", null, contentValues);
+                cv.put("title", title);
+                cv.put("description", description);
+                cv.put("count", count);
+
+                long rowID = database.insert("courses", null, cv);
                 Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
-                        "------ content values : " + contentValues);
+                        "------ content values : " + cv);
 
-               Intent intent = new Intent(this, AddLessonActivity.class);
-               // intent.putExtra("title", title);
-               // intent.putExtra("desciption", description);
-              //  intent.putExtra("count", count);
-               startActivity(intent);
+                Intent intent = new Intent(this, AddLessonActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("description", description);
+                intent.putExtra("count", count);
+                startActivity(intent);
+
                 break;
         }
     }

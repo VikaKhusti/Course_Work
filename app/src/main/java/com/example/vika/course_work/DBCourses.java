@@ -3,8 +3,12 @@ package com.example.vika.course_work;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBCourses extends SQLiteOpenHelper {
+
+    final String LOG_TAG = "myLogs";
+
     public DBCourses(Context context) {
         super(context, "myDB2", null, 1);
     }
@@ -16,6 +20,7 @@ public class DBCourses extends SQLiteOpenHelper {
                 "title text," +
                 "description text," +
                 "count integer);");
+        Log.d(LOG_TAG, "DB Courses is created");
     }
 
     @Override

@@ -16,4 +16,20 @@
     <string name="description">Опис</string>
     <string name="count_of_lessons"> Кількість уроків</string>
     <string name="save">Зберегти</string>
+    <string name="not_found">________</string>
+    <string name="add_new_les">Додати новий урок</string>
+    <string name="title_of_les">Назва уроку:</string>
+    <string name="theme_of_les">Тема:</string>
+    <string name="link">Посилання на відео з YouTube</string>
+    <string name="savecont">Зберегти і продовжити</string>
+    <string name="lesson">Урок:</string>
+    <string name="add_tests">Додати тестові питання:</string>
+    <string name="test_number">Тест №</string>
+    <string name="tests_text">Питання:</string>
+    <string name="variants">Варіанти відповіді:</string>
+    <string name="a">a)</string>
+    <string name="b">b)</string>
+    <string name="c">c)</string>
+    <string name="d">d)</string>
+    <string name="correct">Правильна відповідь:</string>
 </resources>

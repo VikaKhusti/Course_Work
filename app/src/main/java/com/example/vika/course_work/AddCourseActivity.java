@@ -57,7 +57,6 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
 
                 Intent intent = new Intent(this, AddLessonActivity.class);
                 intent.putExtra("title", title);
-                intent.putExtra("description", description);
                 intent.putExtra("count", count);
                 startActivity(intent);
 

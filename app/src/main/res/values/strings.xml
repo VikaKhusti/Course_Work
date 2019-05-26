@@ -32,4 +32,5 @@
     <string name="c">c)</string>
     <string name="d">d)</string>
     <string name="correct">Правильна відповідь:</string>
+    <string name="all_courses">Всі курси</string>
 </resources>

@@ -5,6 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,11 +19,13 @@ public class AllCoursesActivity extends AppCompatActivity {
 
     DBCourses db;
     ArrayList<String> stringArrayList;
+    ListView lvMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_courses);
+        lvMain = (ListView) findViewById(R.id.lvMain);
 
         db = new DBCourses(this);
         SQLiteDatabase database = db.getWritableDatabase();
@@ -49,7 +56,6 @@ public class AllCoursesActivity extends AppCompatActivity {
             }
 
         cursor.close();
-        Log.d(LOG_TAG, "stringArrayList is : " + stringArrayList);
 
         for(int i = 0; i < stringArrayList.size(); i++){
             if(stringArrayList.get(i).equals("")){
@@ -57,5 +63,21 @@ public class AllCoursesActivity extends AppCompatActivity {
             }
         }
         Log.d(LOG_TAG, "stringArrayList now is : " + stringArrayList);
+        String[] coursesArray = stringArrayList.toArray(new String[stringArrayList.size()]);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, coursesArray);
+        lvMain.setAdapter(adapter);
+
+        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item text from ListView
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                Toast.makeText(AllCoursesActivity.this, "selected item is " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }

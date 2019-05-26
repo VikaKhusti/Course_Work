@@ -45,6 +45,9 @@ public class UserActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem mi = menu.add(0, 1, 0, (R.string.preferences));
         mi.setIntent(new Intent(this, PrefActivity.class));
+
+        MenuItem menuItem = menu.add(0, 2, 0, "Всі курси");
+        menuItem.setIntent(new Intent(this, AllCoursesActivity.class));
         return super.onCreateOptionsMenu(menu);
     }
 }

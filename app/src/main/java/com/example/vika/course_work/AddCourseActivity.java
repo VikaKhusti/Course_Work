@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class AddCourseActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,14 +52,21 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                 cv.put("description", description);
                 cv.put("count", count);
 
-                long rowID = database.insert("courses", null, cv);
-                Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
-                        "------ content values : " + cv);
+                if (title.equals(""))
+                {
+                    Toast.makeText(this, "Title is empty", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                else{
+                    long rowID = database.insert("courses", null, cv);
+                    Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
+                            "------ content values : " + cv);
 
-                Intent intent = new Intent(this, AddLessonActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("count", count);
-                startActivity(intent);
+                    Intent intent = new Intent(this, AddLessonActivity.class);
+                    intent.putExtra("title", title);
+                    intent.putExtra("count", count);
+                    startActivity(intent);
+                }
 
                 break;
         }

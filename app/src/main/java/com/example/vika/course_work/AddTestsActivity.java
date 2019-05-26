@@ -18,8 +18,7 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
     TextView lessonTitlTextView, testTv;
     EditText testEt, aEt, bEt, cEt, dEt;
     Button save;
-    RadioButton aRb, bRb, cRb, dRb;
-    String Content;
+    String Content, corr;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +40,7 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
         dEt = (EditText) findViewById(R.id.dEditText);
         save = (Button) findViewById(R.id.saveBtn);
         save.setOnClickListener(this);
-        aRb = (RadioButton) findViewById(R.id.aRadioButton);
-        aRb.setOnClickListener(this);
-        bRb = (RadioButton) findViewById(R.id.bRadioButton);
-        bRb.setOnClickListener(this);
-        cRb = (RadioButton) findViewById(R.id.cRadioButton);
-        cRb.setOnClickListener(this);
-        dRb = (RadioButton) findViewById(R.id.dRadioButton);
-        dRb.setOnClickListener(this);
+
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -56,21 +48,23 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case -1:
+                        corr = null;
                         Toast toast = Toast.makeText(AddTestsActivity.this, "Правильна відповідь не вказана", Toast.LENGTH_LONG);
                         toast.show();
                         break;
                     case R.id.aRadioButton:
-                        Toast toast1 = Toast.makeText(AddTestsActivity.this, "a is checked", Toast.LENGTH_LONG);
+                        corr = "a";
+                        Toast toast1 = Toast.makeText(AddTestsActivity.this, "a is checked", Toast.LENGTH_LONG);  //testing radiobutton's listener
                         toast1.show();
                         break;
                     case R.id.bRadioButton:
-                        //toDo
+                        corr = "b";
                         break;
                     case R.id.cRadioButton:
-                        //toDo
+                        corr = "c";
                         break;
                     case R.id.dRadioButton:
-                        //toDo
+                        corr = "d";
                         break;
 
                 }
@@ -84,18 +78,6 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.saveBtn:
-                //toDo
-                break;
-            case R.id.aRadioButton:
-                //toDo
-                break;
-            case R.id.bRadioButton:
-                //toDo
-                break;
-            case R.id.cRadioButton:
-                //toDo
-                break;
-            case R.id.dRadioButton:
                 //toDo
                 break;
         }

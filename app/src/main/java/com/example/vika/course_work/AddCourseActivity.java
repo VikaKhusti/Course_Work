@@ -65,6 +65,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     Intent intent = new Intent(this, AddLessonActivity.class);
                     intent.putExtra("title", title);
                     intent.putExtra("count", count);
+                    intent.putExtra("rowID", rowID);
                     startActivity(intent);
                 }
 

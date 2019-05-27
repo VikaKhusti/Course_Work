@@ -33,4 +33,6 @@
     <string name="d">d)</string>
     <string name="correct">Правильна відповідь:</string>
     <string name="all_courses">Всі курси</string>
+    <string name="add">Додати</string>
+    <string name="save_and_exit">Зберегти і закрити</string>
 </resources>

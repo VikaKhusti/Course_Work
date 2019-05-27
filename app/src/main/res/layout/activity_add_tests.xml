@@ -243,14 +243,26 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/saveBtn"
+        android:id="@+id/addAndContBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="644dp"
         android:background="#CBF5ED"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/saveAndExitBtn"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:background="#D592E988"
+        android:text="@string/save_and_exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ public class AddLessonActivity extends AppCompatActivity  implements View.OnClic
 
     TextView titleTV, countTV;
     Button contBtn;
+    int rowID;
     EditText les_nameEt, themeEt, linkEt;
     String title, count, lesName, theme, link;
     @Override
@@ -30,6 +31,7 @@ public class AddLessonActivity extends AppCompatActivity  implements View.OnClic
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
         count = intent.getStringExtra("count");
+        rowID = intent.getIntExtra("rowID", -1);
 
         titleTV.setText(title);
         countTV.setText(count);
@@ -47,6 +49,7 @@ public class AddLessonActivity extends AppCompatActivity  implements View.OnClic
                 intent.putExtra("lessonTitle", lesName);
                 intent.putExtra("lessonTheme", theme);
                 intent.putExtra("lessonLink", link);
+                intent.putExtra("rowID", rowID);
                 startActivity(intent);
         }
 

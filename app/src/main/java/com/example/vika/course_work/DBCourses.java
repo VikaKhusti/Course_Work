@@ -21,6 +21,11 @@ public class DBCourses extends SQLiteOpenHelper {
                 "description text," +
                 "count integer);");
         Log.d(LOG_TAG, "DB Courses is created");
+
+        db.execSQL("create table lessons (" +
+                "id integer primary key autoincrement," +
+                "course_id integer," +
+                "lesson_title text);");
     }
 
     @Override

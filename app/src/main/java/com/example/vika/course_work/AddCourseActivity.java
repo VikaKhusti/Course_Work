@@ -19,6 +19,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
     ImageButton saveBtn;
     String title, description, count;
     DBCourses dbCourses;
+    long rowID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     break;
                 }
                 else{
-                    long rowID = database.insert("courses", null, cv);
+                    rowID = database.insert("courses", null, cv);
                     Log.d(LOG_TAG, "------row inserted with ID = " + rowID +
                             "------ content values : " + cv);
 
@@ -67,6 +68,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     intent.putExtra("count", count);
                     intent.putExtra("rowID", rowID);
                     startActivity(intent);
+                    Log.d(LOG_TAG, "id = " + rowID);
                 }
 
                 break;

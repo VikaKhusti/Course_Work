@@ -27,7 +27,7 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
     EditText testEt, aEt, bEt, cEt, dEt;
     Button saveAndExitButton, addAndContButton;
     long rowID;
-    int N = 1;
+    int N = 1, ID = 1;
     String Content = "", corr, test, a, b, c, d;
     String FILENAME;
 
@@ -48,7 +48,7 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
         testTv = (TextView) findViewById(R.id.testTextView);
         lessonTitlTextView.setText("Урок: " + lessonTitle);
 
-        FILENAME = rowID + "." + lessonTitle;
+        FILENAME = rowID + "." + ID;
 
 
         saveAndExitButton = (Button) findViewById(R.id.saveAndExitBtn);
@@ -152,6 +152,7 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.saveAndExitBtn:
                 writeFile();
+                ID++;
                 readFile();
                 break;
         }

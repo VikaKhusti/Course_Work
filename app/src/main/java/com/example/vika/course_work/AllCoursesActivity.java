@@ -1,5 +1,6 @@
 package com.example.vika.course_work;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -15,17 +17,21 @@ import java.util.ArrayList;
 
 import static com.example.vika.course_work.UserActivity.LOG_TAG;
 
-public class AllCoursesActivity extends AppCompatActivity {
+public class AllCoursesActivity extends AppCompatActivity implements View.OnClickListener {
 
     DBCourses db;
     ArrayList<String> stringArrayList;
     ListView lvMain;
+    Button look;
+    String selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_courses);
         lvMain = (ListView) findViewById(R.id.lvMain);
+        look = (Button) findViewById(R.id.lookBtn);
+        look.setOnClickListener(this);
 
         db = new DBCourses(this);
         SQLiteDatabase database = db.getWritableDatabase();
@@ -41,19 +47,19 @@ public class AllCoursesActivity extends AppCompatActivity {
             int countColIndex = cursor.getColumnIndex("count");
 
 
-                do {
-                    Log.d(LOG_TAG,
-                            "ID = " + cursor.getInt(idColIndex) + ", title = "
-                                    + cursor.getString(titleColIndex) + ", description = "
-                                    + cursor.getString(descriptionColIndex) + ", count = "
-                                    + cursor.getString(countColIndex)
-                    );
-                    stringArrayList.add(cursor.getString(titleColIndex));
-                    }
-
-                while (cursor.moveToNext());
-
+            do {
+                Log.d(LOG_TAG,
+                        "ID = " + cursor.getInt(idColIndex) + ", title = "
+                                + cursor.getString(titleColIndex) + ", description = "
+                                + cursor.getString(descriptionColIndex) + ", count = "
+                                + cursor.getString(countColIndex)
+                );
+                stringArrayList.add(cursor.getString(titleColIndex));
             }
+
+            while (cursor.moveToNext());
+
+        }
 
         cursor.close();
 
@@ -73,11 +79,22 @@ public class AllCoursesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected item text from ListView
-                String selectedItem = (String) parent.getItemAtPosition(position);
-                Toast.makeText(AllCoursesActivity.this, "selected item is " + selectedItem, Toast.LENGTH_SHORT).show();
+                selectedItem = (String) parent.getItemAtPosition(position);
+                Log.d(LOG_TAG, "selected item is " + selectedItem);
             }
         });
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.lookBtn:
+                intent = new Intent(this, ThisCourseActivity.class);
+                intent.putExtra("course_title", selectedItem);
+                startActivity(intent);
+        }
     }
 }

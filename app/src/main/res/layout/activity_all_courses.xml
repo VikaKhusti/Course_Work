@@ -15,6 +15,14 @@
         android:textColor="#5f65ff"
         android:textSize="25sp"
         android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/lookBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3E58ACEC"
+        android:text="@string/look" />
+
     <ListView
         android:id="@+id/lvMain"
         android:layout_width="match_parent"

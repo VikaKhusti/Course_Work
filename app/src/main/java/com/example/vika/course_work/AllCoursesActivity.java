@@ -24,6 +24,8 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
     ListView lvMain;
     Button look;
     String selectedItem;
+    String index;
+    int Position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +77,17 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                 android.R.layout.simple_list_item_1, coursesArray);
         lvMain.setAdapter(adapter);
 
+
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected item text from ListView
                 selectedItem = (String) parent.getItemAtPosition(position);
+                Position = position;
                 Log.d(LOG_TAG, "selected item is " + selectedItem);
+                Log.d(LOG_TAG, "pos is " + position);
             }
         });
-
-
     }
 
     @Override
@@ -92,8 +95,14 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch (v.getId()) {
             case R.id.lookBtn:
+                int pos = Integer.valueOf(Position);
+                pos++;
+                Log.d(LOG_TAG, "index is" + index);
+                Log.d(LOG_TAG, "pos now is" + pos);
                 intent = new Intent(this, ThisCourseActivity.class);
                 intent.putExtra("course_title", selectedItem);
+                intent.putExtra("index", pos);
+                intent.putStringArrayListExtra("stringArrayList", stringArrayList);
                 startActivity(intent);
         }
     }

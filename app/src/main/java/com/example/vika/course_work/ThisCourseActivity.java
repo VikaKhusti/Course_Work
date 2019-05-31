@@ -40,15 +40,15 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         String s = intent.getStringExtra("course_title");
         ID = intent.getIntExtra("index", -1);
         selected.setText(s);
+        int id = 1;
         look = (Button) findViewById(R.id.readButton);
         stringArrayList = new ArrayList<String>();
         stringArrayList= intent.getStringArrayListExtra("stringArrayList");
 
         files = new ArrayList<>();
-        for(int i = 0; i < stringArrayList.size(); i++){
-            if(stringArrayList.get(i).startsWith(String.valueOf(ID))){
-                files.add();
-            }
+        for(int i = 0; i < 10; i++){
+                files.add(ID + "." + id);
+                id++;
         }
 
         look.setOnClickListener(this);
@@ -56,19 +56,23 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
 
     void readFile()
     {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    openFileInput(FILENAME)));
-            String str = "";
-            while ((str = br.readLine()) != null) {
-                Log.d(LOG_TAG, str);
-                files.add(str);
-            }
+        for(int i = 0; i < files.size(); i++) {
+            FILENAME = files.get(i);
+            Log.d(LOG_TAG, "file: " + FILENAME);
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        openFileInput(FILENAME)));
+                String str = "";
+                while ((str = br.readLine()) != null) {
+                    Log.d(LOG_TAG, str);
+                    files.add(str);
+                }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -80,6 +84,7 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
             case R.id.readButton:
                 Log.d(LOG_TAG, "logs: ");
                 Log.d(LOG_TAG, "files are " + files);
+                readFile();
                 break;
 
         }

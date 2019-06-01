@@ -95,14 +95,8 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch (v.getId()) {
             case R.id.lookBtn:
-                int pos = Integer.valueOf(Position);
-                pos++;
-                Log.d(LOG_TAG, "index is" + index);
-                Log.d(LOG_TAG, "pos now is" + pos);
                 intent = new Intent(this, ThisCourseActivity.class);
                 intent.putExtra("course_title", selectedItem);
-                intent.putExtra("index", pos);
-                intent.putStringArrayListExtra("stringArrayList", stringArrayList);
                 startActivity(intent);
         }
     }

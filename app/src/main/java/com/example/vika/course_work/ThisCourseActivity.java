@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -25,16 +28,14 @@ import static com.example.vika.course_work.UserActivity.LOG_TAG;
 public class ThisCourseActivity extends AppCompatActivity implements View.OnClickListener {
     TextView selected, desTv, countTv;
     DBCourses dbCourses;
+    DBLessons dbLessons;
     String Title, Description;
     int Count;
     ArrayList<String> lessonsArrayList;
-    ListView coursesListView;
+    ListView lessonsLv;
     String[] data = new String[2];
     int ID;
-    String FILENAME;
     int n = 1;
-    ArrayList<String> files;
-    ArrayList<String> stringArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,29 +46,23 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         desTv = (TextView) findViewById(R.id.DestextView);
         countTv = (TextView) findViewById(R.id.CounttextView);
 
-
-        coursesListView = (ListView) findViewById(R.id.lvLessons);
+        lessonsLv = (ListView) findViewById(R.id.lvLessons);
         Intent intent = getIntent();
         Title = intent.getStringExtra("course_title");
         dbCourses = new DBCourses(this);
+        dbLessons = new DBLessons(this);
         selected.setText(Title);
         ID = intent.getIntExtra("index", -1);
 
         data = readDB(Title);
-        readDB(Title);
         desTv.setText(data[0]);
         countTv.setText(data[1]);
 
-        int id = 1;
-        stringArrayList = new ArrayList<String>();
-        stringArrayList= intent.getStringArrayListExtra("stringArrayList");
+        lessonsArrayList = new ArrayList<String>();
+        readLessonDB();
 
-        files = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-                files.add(ID + "." + id);
-                id++;
-        }
     }
+
 
     String[] readDB(String title)
     {
@@ -109,33 +104,37 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         return data;
     }
 
-    void readFiles()
+    void readLessonDB()
     {
-        for(int i = 0; i < files.size(); i++) {
-            FILENAME = files.get(i);
-            Log.d(LOG_TAG, "file: " + FILENAME);
-            readFile(FILENAME);
-        }
+        SQLiteDatabase database = dbLessons.getReadableDatabase();
 
-    }
+        Log.d(LOG_TAG, "----Rows in lessons---");
+        Cursor cursor = database.query("lessons", null, null, null, null, null, null, null);
 
-    void readFile(String FILENAME)
-    {
-        try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        openFileInput(FILENAME)));
-                String str = "";
-                while ((str = br.readLine()) != null) {
-                    Log.d(LOG_TAG, str);
-                    files.add(str);
+        if(cursor.moveToFirst())
+        {
+            int idColIndex = cursor.getColumnIndex("id");
+            int course_idColIndex = cursor.getColumnIndex("course_id");
+            int titleColIndex = cursor.getColumnIndex("title");
+            int themeColIndex = cursor.getColumnIndex("theme");
+            int linkColIndex = cursor.getColumnIndex("link");
+            int testColIndex = cursor.getColumnIndex("test");
+
+                do{
+                    Log.d(LOG_TAG,
+                            "ID = " + cursor.getInt(idColIndex) +
+                            ", course_id = " + cursor.getInt(course_idColIndex) +
+                            ", title = " + cursor.getString(titleColIndex) +
+                            ", theme =  " + cursor.getString(themeColIndex) +
+                            ", link = " + cursor.getString(linkColIndex) +
+                            ", test = " + cursor.getString(testColIndex)
+                    );
+
+
                 }
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-
+                while (cursor.moveToNext());
         }
+        cursor.close();
 
     }
 

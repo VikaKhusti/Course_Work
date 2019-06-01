@@ -96,13 +96,13 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    void writeFile() {
+     void  writeFile() {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
                     openFileOutput(FILENAME, MODE_PRIVATE)));
             bw.write(Content);
             bw.close();
-            Log.d(LOG_TAG, "Файл з іменем " + FILENAME + " записаний");
+            Log.d(LOG_TAG, "Файл з іменем " + FILENAME + " записаний тут" + getFilesDir());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -110,21 +110,21 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    void readFile() {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    openFileInput(FILENAME)));
-            String str = "";
-            while ((str = br.readLine()) != null) {
-                Log.d(LOG_TAG, str);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    //void readFile() {
+    //    try {
+    //        BufferedReader br = new BufferedReader(new InputStreamReader(
+    //                openFileInput(FILENAME)));
+    //        String str = "";
+    //        while ((str = br.readLine()) != null) {
+    //            Log.d(LOG_TAG, str);
+    //        }
+    //
+    //    } catch (FileNotFoundException e) {
+    //        e.printStackTrace();
+   //     } catch (IOException e) {
+    //      e.printStackTrace();
+    //    }
+   //  }
 
     @Override
     public void onClick(View v) {
@@ -153,7 +153,9 @@ public class AddTestsActivity extends AppCompatActivity implements View.OnClickL
             case R.id.saveAndExitBtn:
                 writeFile();
                 ID++;
-                readFile();
+               // readFile();
+                Intent intent = new Intent(this, AdminPanel.class);
+                startActivity(intent);
                 break;
         }
     }

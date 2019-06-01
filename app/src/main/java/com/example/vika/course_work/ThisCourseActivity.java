@@ -1,5 +1,6 @@
 package com.example.vika.course_work;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,12 +23,17 @@ import java.util.ArrayList;
 import static com.example.vika.course_work.UserActivity.LOG_TAG;
 
 public class ThisCourseActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView selected;
+    TextView selected, desTv, countTv;
+    DBCourses dbCourses;
+    String Title, Description;
+    int Count;
+    ArrayList<String> lessonsArrayList;
+    ListView coursesListView;
+    String[] data = new String[2];
     int ID;
     String FILENAME;
     int n = 1;
     ArrayList<String> files;
-    Button look;
     ArrayList<String> stringArrayList;
 
     @Override
@@ -36,12 +42,23 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_this_course);
 
         selected = (TextView) findViewById(R.id.textViewSelected);
+        desTv = (TextView) findViewById(R.id.DestextView);
+        countTv = (TextView) findViewById(R.id.CounttextView);
+
+
+        coursesListView = (ListView) findViewById(R.id.lvLessons);
         Intent intent = getIntent();
-        String s = intent.getStringExtra("course_title");
+        Title = intent.getStringExtra("course_title");
+        dbCourses = new DBCourses(this);
+        selected.setText(Title);
         ID = intent.getIntExtra("index", -1);
-        selected.setText(s);
+
+        data = readDB(Title);
+        readDB(Title);
+        desTv.setText(data[0]);
+        countTv.setText(data[1]);
+
         int id = 1;
-        look = (Button) findViewById(R.id.readButton);
         stringArrayList = new ArrayList<String>();
         stringArrayList= intent.getStringArrayListExtra("stringArrayList");
 
@@ -50,16 +67,61 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
                 files.add(ID + "." + id);
                 id++;
         }
-
-        look.setOnClickListener(this);
     }
 
-    void readFile()
+    String[] readDB(String title)
+    {
+        SQLiteDatabase database = dbCourses.getReadableDatabase();
+
+        Log.d(LOG_TAG, "-----Rows in courses------");
+        Cursor cursor = database.query("courses", null, null, null, null, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            int idColIndex = cursor.getColumnIndex("id");
+            int titleColIndex = cursor.getColumnIndex("title");
+            int descriptionColIndex = cursor.getColumnIndex("description");
+            int countColIndex = cursor.getColumnIndex("count");
+
+                do{
+                    Log.d(LOG_TAG,
+                            "ID = " + cursor.getInt(idColIndex) +
+                            ", title = " + cursor.getString(titleColIndex) +
+                            ", description = " + cursor.getString(descriptionColIndex) +
+                            ", count = " + cursor.getInt(countColIndex)
+                    );
+
+                        if(Title.equals(cursor.getString(titleColIndex))){
+                            Description =  cursor.getString(descriptionColIndex);
+                            data[0] = Description;
+                            Count = cursor.getInt(countColIndex);
+                            data[1] = String.valueOf(Count);
+                        }
+                }
+                while (cursor.moveToNext());
+
+        }
+        else {
+            Log.d(LOG_TAG, "------ 0 rows ------");
+
+        }
+        cursor.close();
+        return data;
+    }
+
+    void readFiles()
     {
         for(int i = 0; i < files.size(); i++) {
             FILENAME = files.get(i);
             Log.d(LOG_TAG, "file: " + FILENAME);
-            try {
+            readFile(FILENAME);
+        }
+
+    }
+
+    void readFile(String FILENAME)
+    {
+        try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         openFileInput(FILENAME)));
                 String str = "";
@@ -72,7 +134,7 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+
         }
 
     }
@@ -81,11 +143,7 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.readButton:
-                Log.d(LOG_TAG, "logs: ");
-                Log.d(LOG_TAG, "files are " + files);
-                readFile();
-                break;
+
 
         }
     }

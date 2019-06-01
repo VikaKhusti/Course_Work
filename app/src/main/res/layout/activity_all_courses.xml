@@ -20,7 +20,7 @@
         android:id="@+id/lookBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#3E58ACEC"
+        android:background="@drawable/LightBlue"
         android:text="@string/look" />
 
     <ListView

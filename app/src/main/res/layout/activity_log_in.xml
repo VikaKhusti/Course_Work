@@ -45,6 +45,7 @@
         android:layout_marginEnd="163dp"
         android:layout_marginRight="163dp"
         android:layout_marginBottom="271dp"
+        android:background="@drawable/LightBlue"
         android:text="@string/log_in" />
 
     <TextView

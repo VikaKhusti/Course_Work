@@ -16,15 +16,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.vika.course_work.UserActivity.LOG_TAG;
+import static com.example.vika.course_work.UserActivity.username;
 
 public class AllCoursesActivity extends AppCompatActivity implements View.OnClickListener {
 
     DBCourses db;
     ArrayList<String> stringArrayList;
+    ArrayList<String> dataFromDB;
     ListView lvMain;
-    Button look;
+    Button look, addLes;
     String selectedItem;
-    String index;
     int Position;
 
     @Override
@@ -33,11 +34,19 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_all_courses);
         lvMain = (ListView) findViewById(R.id.lvMain);
         look = (Button) findViewById(R.id.lookBtn);
+        addLes = (Button) findViewById(R.id.addLessBtn);
         look.setOnClickListener(this);
+        addLes.setOnClickListener(this);
 
         db = new DBCourses(this);
         SQLiteDatabase database = db.getWritableDatabase();
         stringArrayList = new ArrayList<String>();
+        dataFromDB = new ArrayList<String>();
+
+        if(username.equals("Admin")){
+            addLes.setVisibility(View.VISIBLE);
+        }
+
 
         Cursor cursor = database.query("courses", null, null,
                 null, null, null,
@@ -57,6 +66,10 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                                 + cursor.getString(countColIndex)
                 );
                 stringArrayList.add(cursor.getString(titleColIndex));
+                dataFromDB.add(String.valueOf(cursor.getInt(idColIndex)));
+                dataFromDB.add(cursor.getString(titleColIndex));
+                dataFromDB.add(cursor.getString(descriptionColIndex));
+                dataFromDB.add(cursor.getString(countColIndex));
             }
 
             while (cursor.moveToNext());
@@ -98,6 +111,26 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                 intent = new Intent(this, ThisCourseActivity.class);
                 intent.putExtra("course_title", selectedItem);
                 startActivity(intent);
+                break;
+
+            case R.id.addLessBtn:
+                String id = "", title = "", des = "", count= "";
+                Log.d(LOG_TAG, "data from db = " + dataFromDB);
+                for(int i= 0; i<dataFromDB.size(); i++){
+                    if(selectedItem.equals(dataFromDB.get(i)))
+                    {
+                        id = dataFromDB.get(i-1);
+                        title = dataFromDB.get(i);
+                        des = dataFromDB.get(i+1);
+                        count = dataFromDB.get(i+2);
+                    }
+                }
+                intent = new Intent(this, AddLessonActivity.class);
+                intent.putExtra("title" , title);
+                intent.putExtra("count", count);
+                intent.putExtra("rowID", Long.valueOf(id));
+                startActivity(intent);
+                break;
         }
     }
 }

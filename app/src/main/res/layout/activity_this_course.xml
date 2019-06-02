@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/lvLessons"
+            android:id="@+id/lvMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".AllCoursesActivity"></ListView>

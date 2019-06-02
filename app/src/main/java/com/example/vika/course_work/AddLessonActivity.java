@@ -37,6 +37,8 @@ public class AddLessonActivity extends AppCompatActivity  implements View.OnClic
         title = intent.getStringExtra("title");
         count = intent.getStringExtra("count");
         rowID = intent.getLongExtra("rowID", -1);
+        Log.d(LOG_TAG, "intent is " + title+ ", " + count + ", " + rowID);
+
 
         titleTV.setText(title);
         countTV.setText(count);

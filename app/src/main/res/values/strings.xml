@@ -36,4 +36,7 @@
     <string name="add">Додати</string>
     <string name="save_and_exit">Зберегти і закрити</string>
     <string name="look">Переглянути</string>
+    <string name="add_lesson">Додати урок</string>
+    <string name="enter_course_title">Введіть назву курсу</string>
+    <string name="find">Знайти</string>
 </resources>

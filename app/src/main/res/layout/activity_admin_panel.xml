@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:visibility="visible"
     tools:context=".AdminPanel">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome to Admin Panel"
         android:textSize="25sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -21,7 +22,29 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="61dp"
         android:background="@drawable/LightBlue"
-        android:text="@string/add_new_course" />
+        android:text="@string/add_new_course"
+        android:visibility="visible" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/allCoursesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/LightBlue"
+        android:text="@string/all_courses"
+        android:visibility="visible" />
+
+
+</RelativeLayout>

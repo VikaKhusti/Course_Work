@@ -1,27 +1,17 @@
 package com.example.vika.course_work;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.example.vika.course_work.UserActivity.LOG_TAG;
 
@@ -33,9 +23,8 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
     int Count;
     ArrayList<String> lessonsArrayList;
     ListView lessonsLv;
-    String[] data = new String[2];
+    String[] data = new String[3];
     int ID;
-    int n = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +35,7 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         desTv = (TextView) findViewById(R.id.DestextView);
         countTv = (TextView) findViewById(R.id.CounttextView);
 
-        lessonsLv = (ListView) findViewById(R.id.lvLessons);
+        lessonsLv = (ListView) findViewById(R.id.lvMain);
         Intent intent = getIntent();
         Title = intent.getStringExtra("course_title");
         dbCourses = new DBCourses(this);
@@ -57,9 +46,46 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         data = readDB(Title);
         desTv.setText(data[0]);
         countTv.setText(data[1]);
+        ID = Integer.valueOf(data[2]);
+        Log.d(LOG_TAG, "ID of course = " + ID);
 
-        lessonsArrayList = new ArrayList<String>();
-        readLessonDB();
+        String[] lesson = new String[7];
+        SQLiteDatabase database = dbLessons.getReadableDatabase();
+
+        Log.d(LOG_TAG, "----Rows in lessons---");
+        Cursor cursor = database.query("lessons", null, null, null, null, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            int idColIndex = cursor.getColumnIndex("id");
+            int course_idColIndex = cursor.getColumnIndex("course_id");
+            int titleColIndex = cursor.getColumnIndex("title");
+            int themeColIndex = cursor.getColumnIndex("theme");
+            int linkColIndex = cursor.getColumnIndex("link");
+            int testColIndex = cursor.getColumnIndex("test");
+
+            do{
+                if(ID==cursor.getInt(course_idColIndex)){
+                    lesson[0] = (String.valueOf(cursor.getInt(idColIndex)));
+                    lesson[1] = (String.valueOf(cursor.getInt(course_idColIndex)));
+                    lesson[2] = (cursor.getString(titleColIndex));
+                    lesson[3] = (cursor.getString(themeColIndex));
+                    lesson[4] = (cursor.getString(linkColIndex));
+                    lesson[5] = (cursor.getString(testColIndex));}
+
+            //    Log.d(LOG_TAG,
+             //           "ID = " + cursor.getInt(idColIndex) +
+              //                  ", course_id = " + cursor.getInt(course_idColIndex) +
+               //                 ", title = " + cursor.getString(titleColIndex) +
+               //                 ", theme =  " + cursor.getString(themeColIndex) +
+               //                 ", link = " + cursor.getString(linkColIndex) +
+              //                  ", test = " + cursor.getString(testColIndex)
+              //  );
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+        Log.d(LOG_TAG, "ARRAY IS : " + Arrays.toString(lesson));
 
     }
 
@@ -91,6 +117,8 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
                             data[0] = Description;
                             Count = cursor.getInt(countColIndex);
                             data[1] = String.valueOf(Count);
+                            ID = cursor.getInt(idColIndex);
+                            data[2] = String.valueOf(cursor.getInt(idColIndex));
                         }
                 }
                 while (cursor.moveToNext());
@@ -104,39 +132,6 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         return data;
     }
 
-    void readLessonDB()
-    {
-        SQLiteDatabase database = dbLessons.getReadableDatabase();
-
-        Log.d(LOG_TAG, "----Rows in lessons---");
-        Cursor cursor = database.query("lessons", null, null, null, null, null, null, null);
-
-        if(cursor.moveToFirst())
-        {
-            int idColIndex = cursor.getColumnIndex("id");
-            int course_idColIndex = cursor.getColumnIndex("course_id");
-            int titleColIndex = cursor.getColumnIndex("title");
-            int themeColIndex = cursor.getColumnIndex("theme");
-            int linkColIndex = cursor.getColumnIndex("link");
-            int testColIndex = cursor.getColumnIndex("test");
-
-                do{
-                    Log.d(LOG_TAG,
-                            "ID = " + cursor.getInt(idColIndex) +
-                            ", course_id = " + cursor.getInt(course_idColIndex) +
-                            ", title = " + cursor.getString(titleColIndex) +
-                            ", theme =  " + cursor.getString(themeColIndex) +
-                            ", link = " + cursor.getString(linkColIndex) +
-                            ", test = " + cursor.getString(testColIndex)
-                    );
-
-
-                }
-                while (cursor.moveToNext());
-        }
-        cursor.close();
-
-    }
 
     @Override
     public void onClick(View v) {

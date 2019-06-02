@@ -2,7 +2,9 @@ package com.example.vika.course_work;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+
 
 public class AddCourseActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,10 +36,14 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
         saveBtn = (ImageButton) findViewById(R.id.saveImageButton);
         saveBtn.setOnClickListener(this);
 
+
+
         dbCourses = new DBCourses(this);
 
 
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -70,8 +78,7 @@ public class AddCourseActivity extends AppCompatActivity implements View.OnClick
                     startActivity(intent);
                     Log.d(LOG_TAG, "id = " + rowID);
                 }
-
-                break;
+            break;
         }
     }
 }

@@ -7,23 +7,37 @@ import android.view.View;
 import android.widget.Button;
 
 public class AdminPanel extends AppCompatActivity implements View.OnClickListener {
-    Button addBtn;
+    Button addCourseBtn, allCoursesBtn;
+    String course_title;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
-        addBtn = (Button) findViewById(R.id.addButton);
-        addBtn.setOnClickListener(this);
+        addCourseBtn = (Button) findViewById(R.id.addButton);
+        allCoursesBtn = (Button) findViewById(R.id.allCoursesBtn);
+        addCourseBtn.setOnClickListener(this);
+        allCoursesBtn.setOnClickListener(this);
+
 
     }
 
-    @Override
+
+        @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        Intent intent;
+        switch (v.getId()) {
             case R.id.addButton:
-                Intent intent = new Intent(this, AddCourseActivity.class);
+                intent = new Intent(this, AddCourseActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.allCoursesBtn:
+                intent = new Intent(this, AllCoursesActivity.class);
                 startActivity(intent);
                 break;
         }
     }
+
+
 }

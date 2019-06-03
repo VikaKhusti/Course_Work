@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,9 +21,10 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
     TextView selected, desTv, countTv;
     DBCourses dbCourses;
     DBLessons dbLessons;
-    String Title, Description;
-    int Count;
+    String Title, Description, selectedItem;
+    int Count, Position;
     ArrayList<String> lessonsArrayList;
+    ArrayList<String> lessonArrayList;
     ListView lessonsLv;
     String[] data = new String[3];
     int ID;
@@ -49,7 +52,8 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         ID = Integer.valueOf(data[2]);
         Log.d(LOG_TAG, "ID of course = " + ID);
 
-        String[] lesson = new String[7];
+        lessonsArrayList = new ArrayList<String>();
+        lessonArrayList = new ArrayList<String>();
         SQLiteDatabase database = dbLessons.getReadableDatabase();
 
         Log.d(LOG_TAG, "----Rows in lessons---");
@@ -66,12 +70,15 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
 
             do{
                 if(ID==cursor.getInt(course_idColIndex)){
-                    lesson[0] = (String.valueOf(cursor.getInt(idColIndex)));
-                    lesson[1] = (String.valueOf(cursor.getInt(course_idColIndex)));
-                    lesson[2] = (cursor.getString(titleColIndex));
-                    lesson[3] = (cursor.getString(themeColIndex));
-                    lesson[4] = (cursor.getString(linkColIndex));
-                    lesson[5] = (cursor.getString(testColIndex));}
+                    lessonArrayList.add(String.valueOf(cursor.getInt(idColIndex)));
+                    lessonArrayList.add(String.valueOf(cursor.getInt(course_idColIndex)));
+                    lessonArrayList.add(cursor.getString(titleColIndex));
+                    lessonArrayList.add(cursor.getString(themeColIndex));
+                    lessonArrayList.add(cursor.getString(linkColIndex));
+                    lessonArrayList.add(cursor.getString(testColIndex));
+
+                    lessonsArrayList.add(cursor.getString(titleColIndex));
+                }
 
             //    Log.d(LOG_TAG,
              //           "ID = " + cursor.getInt(idColIndex) +
@@ -85,7 +92,25 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
             while (cursor.moveToNext());
         }
         cursor.close();
-        Log.d(LOG_TAG, "ARRAY IS : " + Arrays.toString(lesson));
+        Log.d(LOG_TAG, "Lesson ArrL IS : " + lessonArrayList);
+        String[] lessons = lessonsArrayList.toArray(new String[lessonsArrayList.size()]);
+        Log.d(LOG_TAG, "ARRAY IS : " + Arrays.toString(lessons));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, lessons);
+        lessonsLv.setAdapter(adapter);
+
+
+        lessonsLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item text from ListView
+                selectedItem = (String) parent.getItemAtPosition(position);
+                Position = position;
+                Log.d(LOG_TAG, "selected item is " + selectedItem);
+                Log.d(LOG_TAG, "pos is " + position);
+            }
+        });
 
     }
 

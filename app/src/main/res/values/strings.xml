@@ -39,4 +39,5 @@
     <string name="add_lesson">Додати урок</string>
     <string name="enter_course_title">Введіть назву курсу</string>
     <string name="find">Знайти</string>
+    <string name="start_learn">Почати вивчати</string>
 </resources>

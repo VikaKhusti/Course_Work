@@ -95,10 +95,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/lvMain"
+            android:id="@+id/lvLessons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".AllCoursesActivity"></ListView>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="568dp"
+        android:background="@drawable/LightBlue"
+        android:text="@string/start_learn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import static com.example.vika.course_work.UserActivity.LOG_TAG;
 
 public class ThisCourseActivity extends AppCompatActivity implements View.OnClickListener {
     TextView selected, desTv, countTv;
+    Button start;
     DBCourses dbCourses;
     DBLessons dbLessons;
     String Title, Description, selectedItem;
@@ -37,8 +39,10 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
         selected = (TextView) findViewById(R.id.textViewSelected);
         desTv = (TextView) findViewById(R.id.DestextView);
         countTv = (TextView) findViewById(R.id.CounttextView);
+        start = (Button) findViewById(R.id.startBtn);
+        start.setOnClickListener(this);
 
-        lessonsLv = (ListView) findViewById(R.id.lvMain);
+        lessonsLv = (ListView) findViewById(R.id.lvLessons);
         Intent intent = getIntent();
         Title = intent.getStringExtra("course_title");
         dbCourses = new DBCourses(this);
@@ -162,7 +166,20 @@ public class ThisCourseActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-
+            case R.id.startBtn:
+                intent= new Intent(this, TestActivity.class);
+                for(int i = 0; i < lessonArrayList.size(); i++)
+                {
+                    if(lessonArrayList.get(i).equals(selectedItem))
+                    {
+                        intent.putExtra("title", lessonArrayList.get(i));
+                        intent.putExtra("theme", lessonArrayList.get(i + 1));
+                        intent.putExtra("link", lessonArrayList.get(i + 2));
+                        intent.putExtra("test", lessonArrayList.get(i + 3));
+                    }
+                }
+                startActivity(intent);
+                break;
 
         }
     }
